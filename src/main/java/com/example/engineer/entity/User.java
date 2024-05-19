@@ -12,6 +12,7 @@ import java.util.Objects;
 @Builder
 @NoArgsConstructor
 @Entity
+@Table(name = "\"user\"", schema = "public", catalog = "medicalservice_db")
 public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

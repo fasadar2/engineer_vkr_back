@@ -13,6 +13,7 @@ import java.util.Objects;
 @Builder
 @NoArgsConstructor
 @Entity
+@Data
 public class Machine {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

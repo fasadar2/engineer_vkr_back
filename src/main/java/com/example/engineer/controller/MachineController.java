@@ -26,10 +26,13 @@ public class MachineController {
         return machineService.GetAllMachine(page,size);
     }
     @GetMapping(path = "/get-page-counter")
-    public long GetPageCounter(@RequestParam(defaultValue = "0") int page,
-                                        @RequestParam(defaultValue = "10") int size)
+    public long GetPageCounter()
     {
         return machineService.GetPageCounter();
+    }
+    @PutMapping(path="/written-of")
+    public Machine WrittenOfmachine(@RequestParam() int machine_id){
+        return machineService.WrittenOfMachine(machine_id);
     }
     @PostMapping(path = "/add-new", produces = MediaType.APPLICATION_JSON_VALUE)
     public Machine AddNewMachine(@RequestBody MachineRequest machineRequest)

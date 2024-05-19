@@ -8,5 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 public interface MachineRepository extends JpaRepository<Machine, Integer>, JpaSpecificationExecutor<Machine> {
-    Page<Machine> findAll(Pageable pageable);
+    Page<Machine> findAllByWrritenOfFalse(Pageable pageable);
+    long countAllByWrritenOf(boolean written_of);
+    Machine findMachineById(int id);
+
 }

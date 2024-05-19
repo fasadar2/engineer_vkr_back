@@ -24,12 +24,12 @@ public class MachineService {
     public Page<Machine> GetAllMachine(int page, int size)
     {
 
-        return machineRepository.findAll(PageRequest.of(page, size));
+        return machineRepository.findAllByWrritenOfFalse(PageRequest.of(page, size));
     }
     public long GetPageCounter()
     {
 
-        return machineRepository.count();
+        return machineRepository.countAllByWrritenOf(false);
     }
     public Machine AddNewMachine(MachineRequest machineRequest)
     {
@@ -46,6 +46,14 @@ public class MachineService {
         machine.setStatusByStatusId(statusRepository.getStatusById(1));
         machine.setDateOfRelase(DateConvertor.ConvertDate(machineRequest.getDateOfRelease()));
 
+        machineRepository.save(machine);
+        return machine;
+    }
+
+    public Machine WrittenOfMachine(int machine_id) {
+        Machine machine = machineRepository.findMachineById(machine_id);
+        machine.setWrritenOf(true);
+        machine.setStatusByStatusId(statusRepository.getStatusById(2));
         machineRepository.save(machine);
         return machine;
     }
