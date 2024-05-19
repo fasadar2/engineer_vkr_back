@@ -5,6 +5,7 @@ import com.example.engineer.entity.Machine;
 import com.example.engineer.methods.DateConvertor;
 import com.example.engineer.repository.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,9 @@ public class MachineService {
     private final MachineTypeRepository machineTypeRepos;
     private final OrganisationRepository organisationRepository;
     private final StatusRepository statusRepository;
+
+    @Autowired
+    StatusService statusService;
     public Page<Machine> GetAllMachine(int page, int size)
     {
 
@@ -51,9 +55,9 @@ public class MachineService {
     }
 
     public Machine WrittenOfMachine(int machine_id) {
+        statusService.SetStatusByIdOnMachineByMachineId(machine_id,2);
         Machine machine = machineRepository.findMachineById(machine_id);
         machine.setWrritenOf(true);
-        machine.setStatusByStatusId(statusRepository.getStatusById(2));
         machineRepository.save(machine);
         return machine;
     }

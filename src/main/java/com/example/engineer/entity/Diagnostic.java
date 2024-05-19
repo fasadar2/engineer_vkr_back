@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
 import java.util.Objects;
 @Getter
 @Setter
@@ -19,21 +20,15 @@ public class Diagnostic {
     private int id;
     @Basic
     @Column(name = "date_start", nullable = false)
-    private Date dateStart;
-    @Basic
-    @Column(name = "time_start", nullable = false)
-    private Time timeStart;
-    @Basic
-    @Column(name = "time_end", nullable = false)
-    private Time timeEnd;
+    private LocalDate dateStart;
     @Basic
     @Column(name = "date_end", nullable = false)
-    private Date dateEnd;
+    private LocalDate dateEnd;
     @ManyToOne
     @JoinColumn(name = "machine_id", referencedColumnName = "id", nullable = false)
     private Machine machineByMachineId;
     @ManyToOne
-    @JoinColumn(name = "result_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "result_id", referencedColumnName = "id")
     private Result resultByResultId;
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
