@@ -33,6 +33,8 @@ public class Diagnostic {
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User userByUserId;
-
+    @Basic
+    @Column(name = "diagnostic_out", nullable = false)
+    private boolean diagnosticOut;
 
 }

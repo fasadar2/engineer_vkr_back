@@ -4,8 +4,10 @@ import com.example.engineer.dto.request.DiagnosticRequestDto;
 import com.example.engineer.dto.request.MachineRequest;
 import com.example.engineer.entity.Diagnostic;
 import com.example.engineer.entity.Machine;
+import com.example.engineer.repository.ServiceRepository;
 import com.example.engineer.services.DiagnosticService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,8 +17,20 @@ import org.springframework.web.bind.annotation.*;
 public class DiagnosticController {
     @Autowired
     DiagnosticService diagnosticService;
+
+    @GetMapping(path = "/get-page")
+    public Page<Diagnostic> GetAllDiagnostic(@RequestParam(defaultValue = "0") int page,
+                                        @RequestParam(defaultValue = "10") int size)
+    {
+        return diagnosticService.GetAllDiagnostic(page,size);
+    }
+    @GetMapping(path = "/get-page-counter")
+    public long GetPageCounter()
+    {
+        return diagnosticService.GetPageCounter();
+    }
     @PostMapping(path = "/add-new", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Diagnostic AddNewMachine(@RequestBody DiagnosticRequestDto diagnosticRequestDto)
+    public Diagnostic AddNewMachineToDiagnostic(@RequestBody DiagnosticRequestDto diagnosticRequestDto)
     {
         return diagnosticService.AddNewDiagnostic(diagnosticRequestDto);
     }
