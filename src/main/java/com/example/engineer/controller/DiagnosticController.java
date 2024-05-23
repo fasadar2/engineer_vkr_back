@@ -2,6 +2,7 @@ package com.example.engineer.controller;
 
 import com.example.engineer.dto.request.DiagnosticRequestDto;
 import com.example.engineer.dto.request.MachineRequest;
+import com.example.engineer.dto.request.ReturnWithoutProblemRequestDTO;
 import com.example.engineer.entity.Diagnostic;
 import com.example.engineer.entity.Machine;
 import com.example.engineer.repository.ServiceRepository;
@@ -33,5 +34,10 @@ public class DiagnosticController {
     public Diagnostic AddNewMachineToDiagnostic(@RequestBody DiagnosticRequestDto diagnosticRequestDto)
     {
         return diagnosticService.AddNewDiagnostic(diagnosticRequestDto);
+    }
+    @PostMapping(path = "/return-without-problems", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Diagnostic AddNewMachineToDiagnostic(@RequestBody ReturnWithoutProblemRequestDTO returnWithoutProblemRequestDTO)
+    {
+        return diagnosticService.ReturnWithOutProblems(returnWithoutProblemRequestDTO);
     }
 }

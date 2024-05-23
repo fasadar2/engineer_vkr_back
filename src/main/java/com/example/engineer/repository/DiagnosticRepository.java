@@ -9,4 +9,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 public interface DiagnosticRepository extends JpaRepository<Diagnostic, Integer>, JpaSpecificationExecutor<Diagnostic> {
     long countAllByDiagnosticOutFalse();
     Page<Diagnostic> findAllByDiagnosticOutFalse(Pageable pageable);
+    Diagnostic findDiagnosticById(int diagnosticId);
 }

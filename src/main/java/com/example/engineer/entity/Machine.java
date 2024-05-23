@@ -37,8 +37,6 @@ public class Machine {
     @Basic
     @Column(name = "wrriten_of", nullable = false)
     private boolean wrritenOf;
-    @OneToMany(mappedBy = "machineByMachineId")
-    private Collection<Diagnostic> diagnosticsById;
     @ManyToOne
     @JoinColumn(name = "organization_id", referencedColumnName = "id", nullable = false)
     private Organization organizationByOrganizationId;

@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.math.BigInteger;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Objects;
 @Getter
@@ -20,10 +21,10 @@ public class Repair {
     private int id;
     @Basic
     @Column(name = "date_start", nullable = false)
-    private Date dateStart;
+    private LocalDate dateStart;
     @Basic
     @Column(name = "date_end", nullable = false)
-    private Date dateEnd;
+    private LocalDate dateEnd;
     @Basic
     @Column(name = "price", nullable = false, precision = 0)
     private BigInteger price;
@@ -37,9 +38,12 @@ public class Repair {
     @JoinColumn(name = "dispatcher_request_id", referencedColumnName = "id")
     private DispatcherRequest dispatcherRequestByDispatcherRequestId;
     @ManyToOne
-    @JoinColumn(name = "error_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "error_id", referencedColumnName = "id")
     private Error errorByErrorId;
     @ManyToOne
-    @JoinColumn(name = "result_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "result_id", referencedColumnName = "id")
     private Result resultByResultId;
+    @Basic
+    @Column(name = "repair_out", nullable = false)
+    private boolean repairOut;
 }

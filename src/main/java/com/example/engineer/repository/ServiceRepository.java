@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 public interface ServiceRepository extends JpaRepository<Repair, Integer>, JpaSpecificationExecutor<Repair> {
-    long countAll();
-    Page<Repair> findAll(Pageable pageable);
+//    long countAll();
+    Page<Repair> findAllByRepairOutFalse(Pageable pageable);
+    long countAllByRepairOutFalse();
 }

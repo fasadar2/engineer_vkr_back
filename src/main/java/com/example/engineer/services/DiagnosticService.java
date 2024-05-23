@@ -1,6 +1,7 @@
 package com.example.engineer.services;
 
 import com.example.engineer.dto.request.DiagnosticRequestDto;
+import com.example.engineer.dto.request.ReturnWithoutProblemRequestDTO;
 import com.example.engineer.entity.Diagnostic;
 import com.example.engineer.entity.Machine;
 import com.example.engineer.methods.DateConvertor;
@@ -25,6 +26,8 @@ public class DiagnosticService {
 
     @Autowired
     StatusService statusService;
+    @Autowired
+    ResultService resultService;
     public Diagnostic AddNewDiagnostic(DiagnosticRequestDto diagnosticRequestDto)
     {
 
@@ -38,12 +41,24 @@ public class DiagnosticService {
         diagnosticRepository.save(diagnostic);
         return diagnostic;
     }
-
+    public Diagnostic GetDiagnositcByDiagnosticID(int diagnostic_id)
+    {
+        return diagnosticRepository.findDiagnosticById(diagnostic_id);
+    }
     public long GetPageCounter() {
         return diagnosticRepository.countAllByDiagnosticOutFalse();
     }
 
     public Page<Diagnostic> GetAllDiagnostic(int page, int size) {
         return diagnosticRepository.findAllByDiagnosticOutFalse(PageRequest.of(page, size));
+    }
+
+    public Diagnostic ReturnWithOutProblems(ReturnWithoutProblemRequestDTO returnWithoutProblemRequestDTO) {
+        Diagnostic diagnostic = diagnosticRepository.findDiagnosticById(returnWithoutProblemRequestDTO.getDiagnostic_id());
+        diagnostic.setDiagnosticOut(true);
+        statusService.SetStatusByIdOnMachineByMachineId(diagnostic.getMachineByMachineId().getId(),4);
+        diagnostic.setResultByResultId(resultService.CreateNewResult(returnWithoutProblemRequestDTO.getResult_text(),"Прблем не выявлено"));
+        diagnosticRepository.save(diagnostic);
+        return diagnostic;
     }
 }

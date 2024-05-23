@@ -7,9 +7,8 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @NoArgsConstructor
-public class ServiceRequestDTO {
+public class ReturnWithoutProblemRequestDTO {
     private int diagnostic_id;
     private String result_text;
-    private String date_end;
-    private int user_id;
+
 }
